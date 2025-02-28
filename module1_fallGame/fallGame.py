@@ -22,6 +22,49 @@ FPS = 60
 
 running = True
 
+#. Step 2. Create player object
+# Object - a data type that allows us to 
+# pass in unique data, including
+# functions and other objects.
+class Player:
+    def __init__(self):
+        self.x = width // 2  # Start in the middle
+        self.y = height - 60  # Near the bottom
+        self.playerWidth = 50
+        self.playerHeight = 50
+        self.playerSpeed = 5  # How fast the player moves
+
+    def move(self, keys): 
+        if keys[pygame.K_LEFT] and self.x > 0:
+            self.x -= self.playerSpeed
+        if keys[pygame.K_RIGHT] and self.x < width - self.playerWidth:
+            self.x += self.playerSpeed
+
+    def draw(self):
+        pygame.draw.rect(screen, (0, 0, 255), 
+   
+        (self.x, self.y, self.playerWidth, self.playerHeight))
+  
+class FallingObject:
+    def __init__(self):
+        self.x = random.randint(0, width - 50)
+        self.y = -50
+        self.width = 50
+        self.height = 50
+        self.speed = random.randint(3, 7)
+
+    def move(self):
+        self.y += self.speed
+
+    def draw(self):
+        pygame.draw.rect(screen,  (255, 0, 0), (self.x, self.y, self.width, self.height))
+
+    def off_screen(self):
+        return self.y > height
+
+
+
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -29,8 +72,3 @@ while running:
 
 
 pygame.quit()
-
-#. Step 2. Create player object
-# Object - a data type that allows us to 
-# pass in unique data, including
-# functions and other objects.
