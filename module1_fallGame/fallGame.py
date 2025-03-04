@@ -9,6 +9,8 @@ pygame.init()
 height = 1000
 width = 1200
 
+WHITE = (255, 255, 255)
+
 # this is reusable code that represents our game screen
 screen = pygame.display.set_mode((width, height)) 
 
@@ -19,8 +21,6 @@ pygame.display.set_caption("Avoid the Falling Objects")
 # Set frame rate
 clock = pygame.time.Clock() 
 FPS = 60  
-
-running = True
 
 #. Step 2. Create player object
 # Object - a data type that allows us to 
@@ -41,8 +41,7 @@ class Player:
             self.x += self.playerSpeed
 
     def draw(self):
-        pygame.draw.rect(screen, (0, 0, 255), 
-   
+        pygame.draw.rect(screen, (0, 0, 255),  
         (self.x, self.y, self.playerWidth, self.playerHeight))
   
 class FallingObject:
@@ -57,15 +56,30 @@ class FallingObject:
         self.y += self.speed
 
     def draw(self):
-        pygame.draw.rect(screen,  (255, 0, 0), (self.x, self.y, self.width, self.height))
+        pygame.draw.rect(screen,  
+        (255, 0, 0), (self.x, self.y, self.width, self.height))
 
     def off_screen(self):
         return self.y > height
 
-
-
+player = Player()
+falling_objects = []
+score = 0
+lives = 3
+    
+running = True
 
 while running:
+    clock.tick(FPS)
+    screen.fill('WHITE')  # Clear screen
+
+    # Player movement
+    keys = pygame.key.get_pressed()
+    player.move(keys)
+    player.draw()
+
+
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
