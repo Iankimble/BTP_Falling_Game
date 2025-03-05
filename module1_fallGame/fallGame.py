@@ -5,6 +5,8 @@ import random
 # code should be interpretted as a game.
 pygame.init()
 
+# Ian  
+
 # Step 1. Set up the display
 height = 1000
 width = 1200
@@ -62,6 +64,9 @@ class FallingObject:
     def off_screen(self):
         return self.y > height
 
+
+
+
 player = Player()
 falling_objects = []
 score = 0
@@ -70,6 +75,7 @@ lives = 3
 running = True
 
 while running:
+
     clock.tick(FPS)
     screen.fill('WHITE')  # Clear screen
 
